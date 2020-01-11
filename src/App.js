@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
 import Movies from './containers/movies.js'
-import CreateMovie from './components/createMovie.js';
+import CreateButton from './components/createButton.js';
 
 function App() {
   return (
     <div className="App">
-      <CreateMovie />
+      <CreateButton />
       <Movies />
     </div>
   );
