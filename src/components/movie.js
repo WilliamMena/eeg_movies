@@ -6,7 +6,7 @@ const Movie = (props) => {
         //     <h1>Title: {props.details.title}</h1>
         //     <h3>Genre: {props.details.genre}</h3>
         // </div>
-
+            <tbody>
             <tr>
                 <td>{props.details.title}</td>
                 <td>{props.details.genre}</td>
@@ -16,6 +16,7 @@ const Movie = (props) => {
 
                 <td>{props.details.main_actors}</td>
             </tr>
+            </tbody>
     )
 }
 
