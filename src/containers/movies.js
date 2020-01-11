@@ -2,6 +2,10 @@ import React from 'react';
 // import Movie from '../components/movie.js';
 import List from '../components/list.js';
 
+import agent from '../agent.js';
+
+
+
 class Movies extends React.Component {
     constructor() {
         super();
@@ -45,6 +49,8 @@ class Movies extends React.Component {
     }
 
     render () {
+        console.log(agent.Movies.all)
+        
         return (
         <div className="container">
             <h1>All Movies</h1>

@@ -6,7 +6,6 @@ const List = (props) => {
     return (
         <div className="List">
             <h4>Showing {props.movies.length} results</h4>
-            
 
 
             <table>
