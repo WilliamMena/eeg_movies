@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 // import Movie from '../components/movie.js';
-import List from '../components/list.js';
+import MovieTable from '../components/movieTable.js';
 
 import agent from '../agent.js';
 
@@ -32,7 +32,7 @@ const Movies = () => {
         return <div>Loading...</div>
     } else {
         return (
-            <List movies={movies} />
+            <MovieTable movies={movies} />
         );
     }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import MovieRow from './movieRow.js';
 
-const List = (props) => {
+const MovieTable = (props) => {
 
     return (
         <div className="List">
@@ -32,4 +32,4 @@ const List = (props) => {
     )
 }
 
-export default List;
+export default MovieTable;
