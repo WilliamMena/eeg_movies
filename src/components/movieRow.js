@@ -4,7 +4,8 @@ function viewMovie() {
     alert('clicked');
 }
 
-const Movie = (props) => {
+
+const MovieRow = (props) => {
     return (
         // <div className="movie" key={props.details.movie_id}>
         //     <h1>Title: {props.details.title}</h1>
@@ -29,4 +30,4 @@ const Movie = (props) => {
     )
 }
 
-export default Movie
+export default MovieRow;

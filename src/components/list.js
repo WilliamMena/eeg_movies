@@ -1,5 +1,5 @@
 import React from 'react';
-import Movie from '../components/movie.js';
+import MovieRow from './movieRow.js';
 
 const List = (props) => {
 
@@ -21,7 +21,7 @@ const List = (props) => {
                 </thead>
 
                 {props.movies.map((movie, index) => (
-                    <Movie details={movie} key={index} />
+                    <MovieRow details={movie} key={index} />
                 ))}
 
 
