@@ -2,7 +2,7 @@ import React from 'react';
 // import Movie from '../components/movie.js';
 import List from '../components/list.js';
 
-import agent from '../agent.js';
+// import agent from '../agent.js';
 
 
 
@@ -61,7 +61,7 @@ class Movies extends React.Component {
                 (result) => {
                     this.setState({
                         isLoaded: true,
-                        movies: result
+                        movies: result.movies
                     });
                 },
                 (error) => {
@@ -98,7 +98,7 @@ class Movies extends React.Component {
           return <div>Loading...</div>;
         } else {
           return (
-            <List movies={movies.movies} />
+            <List movies={movies} />
           );
         }
       }

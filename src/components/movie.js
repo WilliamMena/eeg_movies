@@ -1,5 +1,9 @@
 import React from 'react';
 
+function viewMovie() {
+    alert('clicked');
+}
+
 const Movie = (props) => {
     return (
         // <div className="movie" key={props.details.movie_id}>
@@ -15,6 +19,11 @@ const Movie = (props) => {
                 <td>{props.details.rating}</td>
 
                 <td>{props.details.main_actors}</td>
+
+                <td>
+                    <button onClick={viewMovie}>View</button>
+                    {/* <button onclick={deleteMovie} >Delete</button> */}
+                </td>
             </tr>
             </tbody>
     )
