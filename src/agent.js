@@ -1,6 +1,6 @@
 import superagentPromise from 'superagent-promise';
 import _superagent from 'superagent';
-import Movie from './components/movie';
+
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
@@ -39,4 +39,4 @@ const Movies = {
 };
 
 
-export default Movie;
+export default { Movies };
