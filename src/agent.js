@@ -1,20 +1,15 @@
 import superagentPromise from 'superagent-promise';
 import _superagent from 'superagent';
+import Movie from './components/movie';
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
 const API_ROOT = 'https://homework.eegapis.com';
 
-// const encode = encodeURIComponent;
+
 const responseBody = res => res.body;
 
-let token = process.env.REACT_APP_API_KEY
-
-// const tokenPlugin = req => {
-//   if (token) {
-//     req.set('authorization', `Token ${token}`);
-//   }
-// }
+const token = process.env.REACT_APP_API_KEY
 
 // Token would be probably placed here since it's passed into the end of URL. Not part of the request.
 
@@ -30,7 +25,6 @@ const requests = {
 };
 
 
-const omitSlug = movie => Object.assign({}, movie, { slug: undefined })
 const Movies = {
     all: () =>
         requests.get(`/movies`),
@@ -39,13 +33,10 @@ const Movies = {
     create: (movie) =>
         requests.post(`/movies`, { movie }),
     edit: (movie_id, movie) =>
-        requests.put(`/movies${movie_id}`, { movie: omitSlug(movie) }),
+        requests.put(`/movies${movie_id}`, {movie} ),
     del: (movie_id) =>
         requests.del(`/movies/${movie_id}`)
 };
 
 
-export default {
-  Movies,
-  setToken: _token => { token = _token; }
-};
+export default Movie;

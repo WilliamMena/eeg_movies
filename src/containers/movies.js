@@ -2,7 +2,7 @@ import React from 'react';
 // import Movie from '../components/movie.js';
 import List from '../components/list.js';
 
-// import agent from '../agent.js';
+import agent from '../agent.js';
 
 
 
@@ -71,7 +71,14 @@ class Movies extends React.Component {
                     });
                 }
             )
+
+            // async getMovies => {
+            //     let value = await agent.Movies.all();
+            //     console.log(value)
+            // };
     }
+
+
 
     // render () {
     //     console.log(agent.Movies.all)
@@ -91,6 +98,18 @@ class Movies extends React.Component {
     // }
 
     render() {
+        // let value = await agent.Movies.all;
+        // console.log(value)
+
+        // console.log( await agent.Movies.all)
+
+        // async function main() {
+        //     let result = [];
+
+        //     result = await agent.Movies.all
+        //     console.log(result)
+        // }
+
         const { error, isLoaded, movies } = this.state;
         if (error) {
           return <div>Error: {error.message}</div>;
