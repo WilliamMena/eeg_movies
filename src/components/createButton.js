@@ -17,7 +17,7 @@ const CreateButton = ({postMovie}) => {
         return (
             <div>
                 <button onClick={handleClose}>Close</button>
-                <MovieForm postMovie={postMovie} />
+                <MovieForm postMovie={postMovie} closeForm={handleClose} />
             </div>
         )
     } else {

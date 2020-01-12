@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 
 import agent from '../agent.js';
 
-const MovieForm = ({movie = {}, postMovie}) => {
+const MovieForm = ({movie = {}, postMovie, closeForm}) => {
 
     const { movie_id, title, genre, year, run_time, rating, main_actors } = movie;
 
@@ -21,20 +21,6 @@ const MovieForm = ({movie = {}, postMovie}) => {
     }
 
     function handleMovieGenre(e) {
-        // var options = e.target.options;
-        // var value = [];
-        // for (var i = 0, l = options.length; i < l; i++) {
-        //     if (options[i].selected) {
-        //       value.push(options[i].value);
-        //     }
-        // }
-
-        // if (value.length > 0) {
-        //     setIfMultiple(true);
-        // } else {
-        //     setIfMultiple(false);
-        // }
-
         setMovieGenre(e.target.value)
     }
 
@@ -57,15 +43,12 @@ const MovieForm = ({movie = {}, postMovie}) => {
     async function createMovie(movie) {
         let data;
         try {
-            console.log(movie)
             data = await agent.Movies.create(movie);
         } catch (err) {
             alert('create movie error')
             throw err;
         }
-
         postMovie(data)
-
     }
 
     function handleSubmit(e) {
@@ -82,6 +65,7 @@ const MovieForm = ({movie = {}, postMovie}) => {
         createMovie(payLoad)
         // Should RESET FORM
         // THEN close form
+        closeForm()
 
     }
 

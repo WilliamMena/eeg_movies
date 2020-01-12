@@ -29,7 +29,7 @@ const Movies = () => {
 
     const postMovie = (movie) => {
         console.log(movie)
-        const newMovieList = [...movies, movie]
+        const newMovieList = [movie, ...movies]
         setMovies(newMovieList)
         // agent.Movies.create(movie);
     }

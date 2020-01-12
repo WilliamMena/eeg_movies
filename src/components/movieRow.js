@@ -4,11 +4,16 @@ function viewMovie() {
     alert('clicked');
 }
 
+function deleteMovie() {
+    alert('deleted');
+}
 
-const MovieRow = (props) => {
-    let main_actors = <td></td>
-    if (props.details.main_actors) {
-        main_actors = <td>{props.details.main_actors.join(" - ")}</td>
+
+const MovieRow = ({details}) => {
+    const {title, genre, year, run_time, rating, main_actors} = details
+    let main_actorsHTML = <td></td>
+    if (main_actors) {
+        main_actorsHTML = <td>{main_actors.join(" - ")}</td>
     }
 
     return (
@@ -18,17 +23,17 @@ const MovieRow = (props) => {
         // </div>
             <tbody>
             <tr>
-                <td>{props.details.title}</td>
-                <td>{props.details.genre}</td>
-                <td>{props.details.year}</td>
-                <td>{props.details.run_time}</td>
-                <td>{props.details.rating}</td>
+                <td>{title}</td>
+                <td>{genre}</td>
+                <td>{year}</td>
+                <td>{run_time}</td>
+                <td>{rating}</td>
 
-                <td>{main_actors}</td>
+                {main_actorsHTML}
 
                 <td>
                     <button onClick={viewMovie}>View</button>
-                    {/* <button onclick={deleteMovie} >Delete</button> */}
+                    <button onClick={deleteMovie}>Delete</button>
                 </td>
             </tr>
             </tbody>
