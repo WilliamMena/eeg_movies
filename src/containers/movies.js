@@ -28,7 +28,7 @@ const Movies = () => {
     }, []);
 
     const postMovie = (movie) => {
-        debugger
+        console.log(movie)
     }
 
 
