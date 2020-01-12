@@ -70,19 +70,8 @@ const MovieForm = ({movie = {}, postMovie, closeForm, editForm}) => {
 
     }
 
-    function handleClose() {
-        setEditView(false);
-    }
-
-    let closeButton = ""
-    if (editView) {
-        closeButton = <button onClick={handleClose}>Close</button>
-    }
-
-
     return (
         <form onSubmit={handleSubmit} >
-            {closeButton}
             <label>
                 Title:
                 <input type="text" name="title" value={movieTitle} onChange={handleMovieTitle} />
