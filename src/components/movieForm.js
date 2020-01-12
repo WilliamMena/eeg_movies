@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
 
-const MovieForm = ({movie = {}}) => {
+const MovieForm = ({movie = {}, postMovie}) => {
 
     const { movie_id, title, genre, year, run_time, rating, main_actors } = movie;
 
 
     const [movieTitle, setMovieTitle] = useState(title || '');
     const [movieGenre, setMovieGenre] = useState(genre || '');
+    const [isMultiple, setIfMultiple] = useState(false);
     const [movieYear, setMovieYear] = useState(year || 1888);
     const [movieRunTime, setMovieRunTime] = useState(run_time || 0);
     const [movieRating, setMovieRating] = useState(rating || '');
@@ -24,6 +25,13 @@ const MovieForm = ({movie = {}}) => {
               value.push(options[i].value);
             }
         }
+
+        if (value.length > 0) {
+            setIfMultiple(true);
+        } else {
+            setIfMultiple(false);
+        }
+
         setMovieGenre(value)
     }
 
@@ -43,9 +51,24 @@ const MovieForm = ({movie = {}}) => {
         setMovieActors(e.target.value.split(';').map((word) => word.trim()))
     }
 
+    function handleSubmit(e) {
+        e.preventDefault();
+        let payLoad = {
+            title: movieTitle,
+            genre: movieGenre,
+            year: movieYear,
+            run_time: movieRunTime,
+            rating: movieRating,
+            main_actors: movieActors
+        }
+
+        return postMovie(payLoad);
+        // console.log(JSON.stringify(payLoad))
+    }
+
 
     return (
-        <form>
+        <form onSubmit={handleSubmit} >
             <label>
                 Title:
                 <input type="text" name="title" value={movieTitle} onChange={handleMovieTitle} />
@@ -55,7 +78,7 @@ const MovieForm = ({movie = {}}) => {
                 Genre:
                 {/* <input type="text" name="genre" value={movieGenre} onChange={handleMovieGenre} /> */}
                 {/* <select multiple size="7" value={movieGenre} onChange={handleMovieGenre}> */}
-                <select multiple size="7" value={movieGenre} onChange={handleMovieGenre}>>
+                <select multiple={isMultiple} size="7" value={movieGenre} onChange={handleMovieGenre}>>
                     <option value="action">Action</option>
                     <option value="comedy">Comedy</option>
                     <option value="drama">Drama</option>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import Movie from '../components/movie.js';
 import MovieTable from '../components/movieTable.js';
+import CreateButton from '../components/createButton.js';
 
 import agent from '../agent.js';
 
@@ -26,13 +27,22 @@ const Movies = () => {
         fetchAllMovies();
     }, []);
 
+    const postMovie = (movie) => {
+        debugger
+    }
+
+
+
     if (error) {
         return <div>Error: {error.message}</div>;
     } else if (isLoading) {
         return <div>Loading...</div>
     } else {
         return (
-            <MovieTable movies={movies} />
+            <div>
+                <CreateButton postMovie={postMovie} />
+                <MovieTable movies={movies} />
+            </div>
         );
     }
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import MovieForm from './movieForm.js';
 
-const CreateButton = () => {
+const CreateButton = ({postMovie}) => {
 
     const [showPopup, setPopup] = useState(false);
 
@@ -17,7 +17,7 @@ const CreateButton = () => {
         return (
             <div>
                 <button onClick={handleClose}>Close</button>
-                <MovieForm />
+                <MovieForm postMovie={postMovie} />
             </div>
         )
     } else {
