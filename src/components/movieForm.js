@@ -8,13 +8,13 @@ const MovieForm = ({movie = {}, postMovie, closeForm}) => {
 
     const [movieTitle, setMovieTitle] = useState(title || '');
     const [movieGenre, setMovieGenre] = useState(genre || 'action');
-    const [isMultiple, setIfMultiple] = useState(false);
     const [movieYear, setMovieYear] = useState(year || 1888);
     const [movieRunTime, setMovieRunTime] = useState(run_time || 0);
     const [movieRating, setMovieRating] = useState(rating || 'G');
     const [movieActors, setMovieActors] = useState(main_actors || []);
 
-    const [hasError, setHasError] = useState(false);
+    // For Validations
+    // const [hasError, setHasError] = useState(false);
 
     function handleMovieTitle(e) {
         setMovieTitle(e.target.value);
@@ -80,7 +80,6 @@ const MovieForm = ({movie = {}, postMovie, closeForm}) => {
             <label>
                 Genre:
                 {/* <input type="text" name="genre" value={movieGenre} onChange={handleMovieGenre} /> */}
-                {/* <select multiple size="7" value={movieGenre} onChange={handleMovieGenre}> */}
                 <select size="7" value={movieGenre} onChange={handleMovieGenre}>>
                     <option value="action">Action</option>
                     <option value="comedy">Comedy</option>
@@ -115,11 +114,6 @@ const MovieForm = ({movie = {}, postMovie, closeForm}) => {
             </label>
             <br></br>
             <label>
-                {/* 
-                    Need to implement button that will add another input for main actors each time it's pressed. 
-                    Limit to 10.
-                    Need to look into numbering or how to merge all inputs. What proper structure is.
-                */}
                 Main Actors (optional, seperated by semicolon `;` ) :
                 {/* Have to figure out smart way to use value here. Tried value={movieActors.join('; )} */}
                 <input type="text" name="main_actors" onChange={handleMovieActors}/>
