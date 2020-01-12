@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react';
 // import Movie from '../components/movie.js';
 import MovieTable from '../components/movieTable.js';
 import CreateButton from '../components/createButton.js';
+import MovieForm from '../components/movieForm.js'
 
 import agent from '../agent.js';
 
 const Movies = () => {
     const [error, setError] = useState(null);
     const [isLoading, setLoading] = useState(false);
-    const [movies, setMovies] = useState([]);
+    const [movieList, setMovieList] = useState([]);
+    const [editMovie, setEditMovie] = useState(false);
+    const [movie, setMovie] = useState({});
 
     useEffect(() => {
         async function fetchAllMovies() {
@@ -16,7 +19,7 @@ const Movies = () => {
 
             try {
                 const data = await agent.Movies.all();
-                setMovies(data.movies);
+                setMovieList(data.movies);
             } catch (err) {
                 setError(err);
             }
@@ -29,12 +32,12 @@ const Movies = () => {
 
     const postMovie = (movie) => {
         // console.log(movie)
-        const newMovieList = [movie, ...movies]
-        setMovies(newMovieList)
+        const newMovieList = [movie, ...movieList]
+        setMovieList(newMovieList)
         // agent.Movies.create(movie);
     }
 
-    const handledeleteMovie = (movie_id) => {
+    const handleDeleteMovie = (movie_id) => {
         // console.log("Reached Movies");
         // console.log(movie_id);
         deleteMovie(movie_id);
@@ -47,8 +50,17 @@ const Movies = () => {
             alert('delete movie error');
             throw err;
         }
-        const newMovieList = movies.filter((m) => m.movie_id !== movie_id)
-        setMovies(newMovieList);
+        const newMovieList = movieList.filter((m) => m.movie_id !== movie_id)
+        setMovieList(newMovieList);
+    }
+
+    const handleEditMovie = (movie) => {
+        setEditMovie(true);
+        setMovie(movie)
+    }
+    
+    const handleCloseEditMode = () => {
+        setEditMovie(false);
     }
 
 
@@ -56,12 +68,21 @@ const Movies = () => {
     if (error) {
         return <div>Error: {error.message}</div>;
     } else if (isLoading) {
-        return <div>Loading...</div>
+        return <div>Loading...</div> 
+    } else if (editMovie) {
+        // return <CreateButton movie={movie} />
+        // return <MovieForm movie={movie} editForm={true} />
+        return (
+            <div>
+                <button onClick={handleCloseEditMode}>Close Edit Mode</button>
+                <br></br>
+                <MovieForm movie={movie} editForm={true} />
+            </div>)
     } else {
         return (
             <div>
                 <CreateButton postMovie={postMovie} />
-                <MovieTable movies={movies} deleteMovie={handledeleteMovie} />
+                <MovieTable movies={movieList} editMovie={handleEditMovie} deleteMovie={handleDeleteMovie} />
             </div>
         );
     }

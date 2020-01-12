@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import MovieForm from './movieForm.js';
 
-const CreateButton = ({postMovie}) => {
+const CreateButton = ({postMovie, movie}) => {
 
     const [showPopup, setPopup] = useState(false);
 
@@ -13,7 +13,16 @@ const CreateButton = ({postMovie}) => {
         setPopup(false)
     }
 
-    if (showPopup) {
+    if (movie && showPopup) {
+        return (
+            <div>
+                Edit
+                <button onClick={handleClose}>Close</button>
+                <MovieForm postMovie={postMovie} closeForm={handleClose} editMovie={true} movie={movie}/>
+            </div>
+
+        )
+    } else if (showPopup) {
         return (
             <div>
                 <button onClick={handleClose}>Close</button>

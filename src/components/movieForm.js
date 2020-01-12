@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 
 import agent from '../agent.js';
 
-const MovieForm = ({movie = {}, postMovie, closeForm}) => {
+const MovieForm = ({movie = {}, postMovie, closeForm, editForm}) => {
 
     const { movie_id, title, genre, year, run_time, rating, main_actors } = movie;
 
@@ -12,6 +12,7 @@ const MovieForm = ({movie = {}, postMovie, closeForm}) => {
     const [movieRunTime, setMovieRunTime] = useState(run_time || 0);
     const [movieRating, setMovieRating] = useState(rating || 'G');
     const [movieActors, setMovieActors] = useState(main_actors || []);
+    const [editView, setEditView] = useState(editForm || false);
 
     // For Validations
     // const [hasError, setHasError] = useState(false);
@@ -69,9 +70,19 @@ const MovieForm = ({movie = {}, postMovie, closeForm}) => {
 
     }
 
+    function handleClose() {
+        setEditView(false);
+    }
+
+    let closeButton = ""
+    if (editView) {
+        closeButton = <button onClick={handleClose}>Close</button>
+    }
+
 
     return (
         <form onSubmit={handleSubmit} >
+            {closeButton}
             <label>
                 Title:
                 <input type="text" name="title" value={movieTitle} onChange={handleMovieTitle} />

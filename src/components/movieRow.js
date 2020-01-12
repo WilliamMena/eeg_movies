@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const MovieRow = ({details, deleteMovie}) => {
+const MovieRow = ({details, editMovie, deleteMovie}) => {
 
     const {title, genre, year, run_time, rating, main_actors, movie_id} = details
     let main_actorsHTML = <td></td>
@@ -9,8 +9,8 @@ const MovieRow = ({details, deleteMovie}) => {
         main_actorsHTML = <td>{main_actors.join(" - ")}</td>
     }
 
-    function viewMovie() {
-        alert('clicked');
+    function handleEditMovie() {
+        editMovie(details)
     }
     
     function handleDelete() {
@@ -33,7 +33,7 @@ const MovieRow = ({details, deleteMovie}) => {
                 {main_actorsHTML}
 
                 <td>
-                    <button onClick={viewMovie}>View</button>
+                    <button onClick={handleEditMovie}>Edit</button>
                     <button onClick={handleDelete}>Delete</button>
                 </td>
             </tr>

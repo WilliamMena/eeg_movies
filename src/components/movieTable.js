@@ -1,7 +1,7 @@
 import React from 'react';
 import MovieRow from './movieRow.js';
 
-const MovieTable = ({movies, deleteMovie}) => {
+const MovieTable = ({movies, editMovie, deleteMovie}) => {
 
     const center = {
         margin: 'auto'
@@ -24,7 +24,7 @@ const MovieTable = ({movies, deleteMovie}) => {
                 </thead>
 
                 {movies.map((movie, index) => (
-                    <MovieRow details={movie} key={index} deleteMovie={deleteMovie} />
+                    <MovieRow details={movie} key={index} editMovie={editMovie} deleteMovie={deleteMovie} />
                 ))}
 
 
