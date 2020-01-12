@@ -6,6 +6,11 @@ function viewMovie() {
 
 
 const MovieRow = (props) => {
+    let main_actors = <td></td>
+    if (props.details.main_actors) {
+        main_actors = <td>{props.details.main_actors.join(" - ")}</td>
+    }
+
     return (
         // <div className="movie" key={props.details.movie_id}>
         //     <h1>Title: {props.details.title}</h1>
@@ -19,7 +24,7 @@ const MovieRow = (props) => {
                 <td>{props.details.run_time}</td>
                 <td>{props.details.rating}</td>
 
-                <td>{props.details.main_actors}</td>
+                <td>{main_actors}</td>
 
                 <td>
                     <button onClick={viewMovie}>View</button>

@@ -31,7 +31,7 @@ const Movies = {
     oneMovie: (movie_id) =>
         requests.get(`/movies${movie_id}`),
     create: (movie) => 
-        requests.post(`/movies`, { movie }),
+        requests.post(`/movies`, { ...movie }),
     edit: (movie_id, movie) =>
         requests.put(`/movies${movie_id}`, {movie} ),
     del: (movie_id) =>

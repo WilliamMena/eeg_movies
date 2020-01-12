@@ -3,12 +3,15 @@ import MovieRow from './movieRow.js';
 
 const MovieTable = (props) => {
 
+    const center = {
+        margin: 'auto'
+    }
+
     return (
         <div className="List">
             <h4>Showing {props.movies.length} results</h4>
 
-
-            <table>
+            <table style={center}>
                 <thead>
                     <tr>
                         <th>Title</th>

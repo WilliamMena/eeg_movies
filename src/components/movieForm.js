@@ -1,46 +1,49 @@
 import React, {useState} from 'react';
 
+import agent from '../agent.js';
+
 const MovieForm = ({movie = {}, postMovie}) => {
 
     const { movie_id, title, genre, year, run_time, rating, main_actors } = movie;
 
-
     const [movieTitle, setMovieTitle] = useState(title || '');
-    const [movieGenre, setMovieGenre] = useState(genre || '');
+    const [movieGenre, setMovieGenre] = useState(genre || 'action');
     const [isMultiple, setIfMultiple] = useState(false);
     const [movieYear, setMovieYear] = useState(year || 1888);
     const [movieRunTime, setMovieRunTime] = useState(run_time || 0);
-    const [movieRating, setMovieRating] = useState(rating || '');
+    const [movieRating, setMovieRating] = useState(rating || 'G');
     const [movieActors, setMovieActors] = useState(main_actors || []);
+
+    const [hasError, setHasError] = useState(false);
 
     function handleMovieTitle(e) {
         setMovieTitle(e.target.value);
     }
 
     function handleMovieGenre(e) {
-        var options = e.target.options;
-        var value = [];
-        for (var i = 0, l = options.length; i < l; i++) {
-            if (options[i].selected) {
-              value.push(options[i].value);
-            }
-        }
+        // var options = e.target.options;
+        // var value = [];
+        // for (var i = 0, l = options.length; i < l; i++) {
+        //     if (options[i].selected) {
+        //       value.push(options[i].value);
+        //     }
+        // }
 
-        if (value.length > 0) {
-            setIfMultiple(true);
-        } else {
-            setIfMultiple(false);
-        }
+        // if (value.length > 0) {
+        //     setIfMultiple(true);
+        // } else {
+        //     setIfMultiple(false);
+        // }
 
-        setMovieGenre(value)
+        setMovieGenre(e.target.value)
     }
 
     function handleMovieYear(e) {
-        setMovieYear(e.target.value);
+        setMovieYear(parseInt(e.target.value));
     }
 
     function handleMovieRunTime(e) {
-        setMovieRunTime(e.target.value);
+        setMovieRunTime(parseInt(e.target.value));
     }
 
     function handleMovieRating(e) {
@@ -49,6 +52,20 @@ const MovieForm = ({movie = {}, postMovie}) => {
 
     function handleMovieActors(e) {
         setMovieActors(e.target.value.split(';').map((word) => word.trim()))
+    }
+
+    async function createMovie(movie) {
+        let data;
+        try {
+            console.log(movie)
+            data = await agent.Movies.create(movie);
+        } catch (err) {
+            alert('create movie error')
+            throw err;
+        }
+
+        postMovie(data)
+
     }
 
     function handleSubmit(e) {
@@ -62,8 +79,10 @@ const MovieForm = ({movie = {}, postMovie}) => {
             main_actors: movieActors
         }
 
-        return postMovie(payLoad);
-        // console.log(JSON.stringify(payLoad))
+        createMovie(payLoad)
+        // Should RESET FORM
+        // THEN close form
+
     }
 
 
@@ -78,7 +97,7 @@ const MovieForm = ({movie = {}, postMovie}) => {
                 Genre:
                 {/* <input type="text" name="genre" value={movieGenre} onChange={handleMovieGenre} /> */}
                 {/* <select multiple size="7" value={movieGenre} onChange={handleMovieGenre}> */}
-                <select multiple={isMultiple} size="7" value={movieGenre} onChange={handleMovieGenre}>>
+                <select size="7" value={movieGenre} onChange={handleMovieGenre}>>
                     <option value="action">Action</option>
                     <option value="comedy">Comedy</option>
                     <option value="drama">Drama</option>
@@ -91,12 +110,12 @@ const MovieForm = ({movie = {}, postMovie}) => {
             <br></br>
             <label>
                 Year:
-                <input type="text" name="year" value={movieYear} onChange={handleMovieYear} />
+                <input type="number" name="year" value={movieYear} onChange={handleMovieYear} />
             </label>
             <br></br>
             <label>
                 Run Time (in minutes):
-                <input type="text" name="run_time" value={movieRunTime} onChange={handleMovieRunTime} />
+                <input type="number" name="run_time" value={movieRunTime} onChange={handleMovieRunTime} />
             </label>
             <br></br>
             <label>

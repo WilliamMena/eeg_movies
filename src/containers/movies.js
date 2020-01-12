@@ -29,6 +29,9 @@ const Movies = () => {
 
     const postMovie = (movie) => {
         console.log(movie)
+        const newMovieList = [...movies, movie]
+        setMovies(newMovieList)
+        // agent.Movies.create(movie);
     }
 
 
