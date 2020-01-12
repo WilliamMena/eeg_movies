@@ -13,8 +13,6 @@ const CreateButton = () => {
         setPopup(false)
     }
 
-
-
     if (showPopup) {
         return (
             <div>
@@ -30,11 +28,6 @@ const CreateButton = () => {
         )
     }
 
-    // return (
-    //     <div className="form">
-    //         <button onClick={handleOnClick}>Create</button>
-    //     </div>
-    // )
 }
 
 export default CreateButton;
