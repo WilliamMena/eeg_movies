@@ -29,7 +29,7 @@ const Movies = {
     all: () =>
         requests.get(`/movies`),
     oneMovie: (movie_id) =>
-        requests.get(`/movies${movie_id}`),
+        requests.get(`/movies/${movie_id}`),
     create: (movie) => 
         requests.post(`/movies`, { ...movie }),
     edit: (movie_id, movie) =>

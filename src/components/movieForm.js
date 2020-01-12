@@ -39,6 +39,7 @@ const MovieForm = ({movie = {}, postMovie, closeForm, editForm, updateMovie, clo
 
     function handleMovieActors(e) {
         // setMovieActors(e.target.value.split(';').map((word) => word.trim()))
+        // Need to find way to limit to 3 people without messing up the input value
         setMovieActors(e.target.value.split(';'));
     }
 
@@ -142,7 +143,7 @@ const MovieForm = ({movie = {}, postMovie, closeForm, editForm, updateMovie, clo
             </label>
             <br></br>
             <label>
-                Main Actors (optional, seperated by semicolon `;` ) :
+                Main Actors (optional, up to 3, seperated by semicolon `;` ) :
                 {/* Have to figure out smart way to use value here. Tried value={movieActors.join('; )} */}
                 <input type="text" name="main_actors" value={movieActors.join(';')} onChange={handleMovieActors}/>
             </label>
