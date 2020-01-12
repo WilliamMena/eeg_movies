@@ -17,9 +17,6 @@ const MovieForm = ({movie = {}}) => {
     }
 
     function handleMovieGenre(e) {
-        // setMovieGenre(e.target.value);
-        // console.log(e.target.options)
-
         var options = e.target.options;
         var value = [];
         for (var i = 0, l = options.length; i < l; i++) {
@@ -27,9 +24,7 @@ const MovieForm = ({movie = {}}) => {
               value.push(options[i].value);
             }
         }
-        
         setMovieGenre(value)
-
     }
 
     function handleMovieYear(e) {
@@ -44,6 +39,10 @@ const MovieForm = ({movie = {}}) => {
         setMovieRating(e.target.value);
     }
 
+    function handleMovieActors(e) {
+        setMovieActors(e.target.value.split(';').map((word) => word.trim()))
+    }
+
 
     return (
         <form>
@@ -56,7 +55,7 @@ const MovieForm = ({movie = {}}) => {
                 Genre:
                 {/* <input type="text" name="genre" value={movieGenre} onChange={handleMovieGenre} /> */}
                 {/* <select multiple size="7" value={movieGenre} onChange={handleMovieGenre}> */}
-                <select multiple size="7" onChange={handleMovieGenre}>>
+                <select multiple size="7" value={movieGenre} onChange={handleMovieGenre}>>
                     <option value="action">Action</option>
                     <option value="comedy">Comedy</option>
                     <option value="drama">Drama</option>
@@ -96,7 +95,8 @@ const MovieForm = ({movie = {}}) => {
                     Need to look into numbering or how to merge all inputs. What proper structure is.
                 */}
                 Main Actors (optional, seperated by semicolon `;` ) :
-                <input type="text" name="main_actors"/>
+                {/* Have to figure out smart way to use value here. Tried value={movieActors.join('; )} */}
+                <input type="text" name="main_actors" onChange={handleMovieActors}/>
             </label>
 
             <br></br>
