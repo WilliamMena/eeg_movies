@@ -1,19 +1,20 @@
 import React from 'react';
 
-function viewMovie() {
-    alert('clicked');
-}
 
-function deleteMovie() {
-    alert('deleted');
-}
+const MovieRow = ({details, deleteMovie}) => {
 
-
-const MovieRow = ({details}) => {
-    const {title, genre, year, run_time, rating, main_actors} = details
+    const {title, genre, year, run_time, rating, main_actors, movie_id} = details
     let main_actorsHTML = <td></td>
     if (main_actors) {
         main_actorsHTML = <td>{main_actors.join(" - ")}</td>
+    }
+
+    function viewMovie() {
+        alert('clicked');
+    }
+    
+    function handleDelete() {
+        deleteMovie(movie_id)
     }
 
     return (
@@ -33,7 +34,7 @@ const MovieRow = ({details}) => {
 
                 <td>
                     <button onClick={viewMovie}>View</button>
-                    <button onClick={deleteMovie}>Delete</button>
+                    <button onClick={handleDelete}>Delete</button>
                 </td>
             </tr>
             </tbody>

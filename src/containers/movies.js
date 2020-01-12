@@ -34,6 +34,24 @@ const Movies = () => {
         // agent.Movies.create(movie);
     }
 
+    const handledeleteMovie = (movie_id) => {
+        // console.log("Reached Movies");
+        // console.log(movie_id);
+        deleteMovie(movie_id);
+    }
+
+    async function deleteMovie(movie_id) {
+        let data;
+        try {
+            data = await agent.Movies.del(movie_id);
+        } catch (err) {
+            alert('delete movie error');
+            throw err;
+        }
+        const newMovieList = movies.filter((m) => m.movie_id !== movie_id)
+        setMovies(newMovieList);
+    }
+
 
 
     if (error) {
@@ -44,7 +62,7 @@ const Movies = () => {
         return (
             <div>
                 <CreateButton postMovie={postMovie} />
-                <MovieTable movies={movies} />
+                <MovieTable movies={movies} deleteMovie={handledeleteMovie} />
             </div>
         );
     }
