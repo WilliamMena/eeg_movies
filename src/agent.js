@@ -33,7 +33,7 @@ const Movies = {
     create: (movie) => 
         requests.post(`/movies`, { ...movie }),
     edit: (movie_id, movie) =>
-        requests.put(`/movies${movie_id}`, {movie} ),
+        requests.put(`/movies/${movie_id}`, { ...movie } ),
     del: (movie_id) =>
         requests.del(`/movies/${movie_id}`)
 };

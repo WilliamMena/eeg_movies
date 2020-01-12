@@ -37,6 +37,14 @@ const Movies = () => {
         // agent.Movies.create(movie);
     }
 
+    const updateMovie = (mov) => {
+        const indexOfMovie = movieList.indexOf(movieList.find(e => e.movie_id === mov.movie_id))
+        const newMovieList = [...movieList]
+        newMovieList.splice(indexOfMovie, 1, mov)
+
+        setMovieList(newMovieList)
+    }
+
     const handleDeleteMovie = (movie_id) => {
         // console.log("Reached Movies");
         // console.log(movie_id);
@@ -76,7 +84,7 @@ const Movies = () => {
             <div>
                 <button onClick={handleCloseEditMode}>Close Edit Mode</button>
                 <br></br>
-                <MovieForm movie={movie} editForm={true} />
+                <MovieForm movie={movie} editForm={true} updateMovie={updateMovie} close={handleCloseEditMode}/>
             </div>)
     } else {
         return (
