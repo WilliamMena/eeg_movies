@@ -28,7 +28,7 @@ const Movies = () => {
     }, []);
 
     const postMovie = (movie) => {
-        console.log(movie)
+        // console.log(movie)
         const newMovieList = [movie, ...movies]
         setMovies(newMovieList)
         // agent.Movies.create(movie);
@@ -41,9 +41,8 @@ const Movies = () => {
     }
 
     async function deleteMovie(movie_id) {
-        let data;
         try {
-            data = await agent.Movies.del(movie_id);
+            await agent.Movies.del(movie_id);
         } catch (err) {
             alert('delete movie error');
             throw err;
