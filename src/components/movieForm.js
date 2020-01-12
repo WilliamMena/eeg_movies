@@ -97,7 +97,7 @@ const MovieForm = ({movie = {}, postMovie, closeForm}) => {
             </label>
             <br></br>
             <label>
-                Run Time (in minutes):
+                Run Time (in seconds):
                 <input type="number" name="run_time" value={movieRunTime} onChange={handleMovieRunTime} />
             </label>
             <br></br>
