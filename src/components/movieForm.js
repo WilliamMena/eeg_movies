@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import {Form, Button} from 'react-bootstrap'
 
 import agent from '../agent.js';
 
-const MovieForm = ({movie = {}, postMovie, closeForm, editForm, updateMovie, close}) => {
+const MovieForm = ({ movie = {}, postMovie, closeForm, editForm, updateMovie, close }) => {
 
     const { movie_id, title, genre, year, run_time, rating, main_actors } = movie;
 
@@ -100,57 +101,129 @@ const MovieForm = ({movie = {}, postMovie, closeForm, editForm, updateMovie, clo
     }
 
     return (
-        <form onSubmit={handleSubmit} >
-            <label>
-                Title:
-                <input type="text" name="title" value={movieTitle} onChange={handleMovieTitle} />
-            </label>
-            <br></br>
-            <label>
-                Genre:
-                {/* <input type="text" name="genre" value={movieGenre} onChange={handleMovieGenre} /> */}
-                <select size="7" value={movieGenre} onChange={handleMovieGenre}>>
-                    <option value="action">Action</option>
-                    <option value="comedy">Comedy</option>
-                    <option value="drama">Drama</option>
-                    <option value="fantasy">Fantasy</option>
-                    <option value="horror">Horror</option>
-                    <option value="musical">Musical</option>
-                    <option value="romance">Romance</option>
-                </select>
-            </label>
-            <br></br>
-            <label>
-                Year:
-                <input type="number" name="year" value={movieYear} onChange={handleMovieYear} />
-            </label>
-            <br></br>
-            <label>
-                Run Time (in seconds):
-                <input type="number" name="run_time" value={movieRunTime} onChange={handleMovieRunTime} />
-            </label>
-            <br></br>
-            <label>
-                Rating:
-                {/* <input type="text" name="rating" value={movieRating} onChange={handleMovieRating} /> */}
-                <select value={movieRating} onChange={handleMovieRating}>
-                    <option value="G">G</option>
-                    <option value="PG">PG</option>
-                    <option value="PG-13">PG-13</option>
-                    <option value="R">R</option>
-                    <option value="NC-17">NC-17</option>
-                </select>
-            </label>
-            <br></br>
-            <label>
-                Main Actors (optional, up to 3, seperated by semicolon `;` ) :
-                {/* Have to figure out smart way to use value here. Tried value={movieActors.join('; )} */}
-                <input type="text" name="main_actors" value={movieActors.join(';')} onChange={handleMovieActors}/>
-            </label>
+        // Bootstrap Version
+        <Form onSubmit={handleSubmit} >
+            <Form.Group controlId="formMovieTitle">
+                <Form.Label>
+                    Title
+                <Form.Control type="text" name="title" value={movieTitle} onChange={handleMovieTitle} />
+                </Form.Label>
+            </Form.Group>
 
-            <br></br>
-            <input type="submit" value="Submit" />
-        </form>
+            <Form.Group controlId="formMovieGenre">
+                <Form.Label>
+                    Genre
+                {/* <input type="text" name="genre" value={movieGenre} onChange={handleMovieGenre} /> */}
+                    <Form.Control as="select" size="7" value={movieGenre} onChange={handleMovieGenre}>>
+                    <option value="action">Action</option>
+                        <option value="comedy">Comedy</option>
+                        <option value="drama">Drama</option>
+                        <option value="fantasy">Fantasy</option>
+                        <option value="horror">Horror</option>
+                        <option value="musical">Musical</option>
+                        <option value="romance">Romance</option>
+                    </Form.Control>
+                </Form.Label>
+            </Form.Group>
+
+            <Form.Group controlId="formMovieYear">
+                <Form.Label>
+                    Year
+                <Form.Control type="number" name="year" value={movieYear} onChange={handleMovieYear} />
+                </Form.Label>
+            </Form.Group>
+
+            <Form.Group controlId="formMovieRunTime">
+                <Form.Label>
+                    Run Time (in seconds)
+                <Form.Control type="number" name="run_time" value={movieRunTime} onChange={handleMovieRunTime} />
+                </Form.Label>
+            </Form.Group>
+
+            <Form.Group controlId="formMovieRating">
+                <Form.Label>
+                    Rating
+                {/* <input type="text" name="rating" value={movieRating} onChange={handleMovieRating} /> */}
+                    <Form.Control as="select" value={movieRating} onChange={handleMovieRating}>
+                        <option value="G">G</option>
+                        <option value="PG">PG</option>
+                        <option value="PG-13">PG-13</option>
+                        <option value="R">R</option>
+                        <option value="NC-17">NC-17</option>
+                    </Form.Control>
+                </Form.Label>
+            </Form.Group>
+
+            <Form.Group controlId="formMovieMainActors">
+            <Form.Label>
+                Main Actors
+                {/* Have to figure out smart way to use value here. Tried value={movieActors.join('; )} */}
+                <Form.Control type="text" name="main_actors" value={movieActors.join(';')} onChange={handleMovieActors} />
+                <Form.Text className="text-muted">
+                    (optional, up to 3, seperated by semicolon `;` ) 
+                </Form.Text>
+            </Form.Label>
+            </Form.Group>
+
+            <Button variant="dark" type="submit">
+                Submit
+            </Button>
+        </Form>
+
+
+
+        // REGULAR VERSION
+        // <form onSubmit={handleSubmit} >
+        //     <label>
+        //         Title:
+        //         <input type="text" name="title" value={movieTitle} onChange={handleMovieTitle} />
+        //     </label>
+        //     <br></br>
+        //     <label>
+        //         Genre:
+        //         {/* <input type="text" name="genre" value={movieGenre} onChange={handleMovieGenre} /> */}
+        //         <select size="7" value={movieGenre} onChange={handleMovieGenre}>>
+        //             <option value="action">Action</option>
+        //             <option value="comedy">Comedy</option>
+        //             <option value="drama">Drama</option>
+        //             <option value="fantasy">Fantasy</option>
+        //             <option value="horror">Horror</option>
+        //             <option value="musical">Musical</option>
+        //             <option value="romance">Romance</option>
+        //         </select>
+        //     </label>
+        //     <br></br>
+        //     <label>
+        //         Year:
+        //         <input type="number" name="year" value={movieYear} onChange={handleMovieYear} />
+        //     </label>
+        //     <br></br>
+        //     <label>
+        //         Run Time (in seconds):
+        //         <input type="number" name="run_time" value={movieRunTime} onChange={handleMovieRunTime} />
+        //     </label>
+        //     <br></br>
+        //     <label>
+        //         Rating:
+        //         {/* <input type="text" name="rating" value={movieRating} onChange={handleMovieRating} /> */}
+        //         <select value={movieRating} onChange={handleMovieRating}>
+        //             <option value="G">G</option>
+        //             <option value="PG">PG</option>
+        //             <option value="PG-13">PG-13</option>
+        //             <option value="R">R</option>
+        //             <option value="NC-17">NC-17</option>
+        //         </select>
+        //     </label>
+        //     <br></br>
+        //     <label>
+        //         Main Actors (optional, up to 3, seperated by semicolon `;` ) :
+        //         {/* Have to figure out smart way to use value here. Tried value={movieActors.join('; )} */}
+        //         <input type="text" name="main_actors" value={movieActors.join(';')} onChange={handleMovieActors}/>
+        //     </label>
+
+        //     <br></br>
+        //     <input type="submit" value="Submit" />
+        // </form>
     )
 }
 
