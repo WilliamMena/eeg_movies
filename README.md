@@ -11,11 +11,12 @@ EEG Code Challenge Submission for [William Mena](mailto:williammena1991@gmail.co
 ## Create .env file
 
 A .env file is needed to successfully use this application.<br />
-This is how you will be able to utilize the data from the backend.<br /> 
+This is how you're able to utilize the data from the backend.<br /> 
 Rename the `.env.sample` to `.env`.<br/>
 Inside of the .env file, insert a valid `API_KEY` directly after `REACT_APP_API_KEY=`, without quotation marks or brackets.
 
-    REACT_APP_API_KEY={API_KEY}
+    REACT_APP_API_KEY=1234-0987-5432
+    // Just an example. Not a valid key.
 
 ### `npm start`
 
