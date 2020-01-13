@@ -38,28 +38,28 @@ To accomplish all this I've used a couple libraries.
 Mainly [react-table](https://github.com/tannerlinsley/react-table/tree/master/examples/sub-components). <br />
 The other packages were for handling things like API requests but could have been done with the `fetch()` API.
 
-## Component Breakdown
+## < Component Breakdown />
 
 So you may notice a number of components. Some can be ignored due to them being created during the initial moment when trying to figure out CRUD. Some kept for when testing `outside` of the Paginated table.
 
 The ones listed here are the more notable one for the final execution.
 
-### Header
+### < Header />
 Contains Logo and Name
 
-### Movies
+### < Movies />
 Container which houses the main `movieList`. Here is where the fetching of all the movies is located and primarily controls/displays the rest of the application.
 
-### MovieForm
+### < MovieForm />
 The form in where you're able to create and edit a movie. Functions for both are in this component.
 
-### CreateButton
+### < CreateButton />
 Button up center which, when clicked, opens a clean `MovieForm` for creation of a movie. Once created, the `movieList` is updated and rendered.
 
-### MovieRowButtons
+### < MovieRowButtons />
 Came from MovieRow before using the Paginated Library. Now a component which houses the `edit` and `delete` buttons. When clicking `edit`, the `MovieForm` dominates the screen and presents itself with the populated movie data.
 
-### PaginatedMovieTable
+### < PaginatedMovieTable />
 A paginated table that displays 10 per page, with the option of changing to 20. Sorting of each column can be done by clicking the actual table header. Clicking will sort in ascending order. Clicking again will sort in descending. Clicking one more time will remove the sort.
 
 There is also a search input. Here you can type in what ever you like and it will search and filter all the data. All columns can be filtered in this search input. Not case sensitive.
