@@ -4,6 +4,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+## Install
+
+    $ git clone https://github.com/WilliamMena/eeg_movies.git
+    $ cd eeg_movies
+    $ npm install
+
 ### `npm start`
 
 Runs the app in the development mode.<br />
