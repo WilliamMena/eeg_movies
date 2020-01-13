@@ -148,7 +148,7 @@ const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
                                     <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                                         {column.render('Header')}
                                         <span>
-                                            {column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}
+                                            {column.isSorted ? (column.isSortedDesc ? ' ▼' : ' ▲') : ''}
                                             {/* ⇩▼ ⇧▲   https://unicode-table.com/en/sets/arrow-symbols/*/}
                                         </span>
 
