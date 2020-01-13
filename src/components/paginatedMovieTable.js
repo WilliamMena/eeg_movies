@@ -1,7 +1,92 @@
 import React from 'react';
 import MovieRow from './movieRow.js';
+import { useTable } from 'react-table';
+import MovieRowButtons from './movieRowButtons.js';
 
-const PaginatedMovieTable = ({movies, editMovie, deleteMovie}) => {
+const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
+
+    function Table({ columns, data }) {
+        // Use the state and functions returned from useTable to build your UI
+        const {
+            getTableProps,
+            getTableBodyProps,
+            headerGroups,
+            rows,
+            prepareRow,
+        } = useTable({
+            columns,
+            data,
+        })
+    
+        // Render the UI for your table
+        return (
+            <table {...getTableProps()}>
+                <thead>
+                    {headerGroups.map(headerGroup => (
+                        <tr {...headerGroup.getHeaderGroupProps()}>
+                            {headerGroup.headers.map(column => (
+                                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                            ))}
+                        </tr>
+                    ))}
+                </thead>
+                <tbody {...getTableBodyProps()}>
+                    {rows.map(
+                        (row, i) => {
+                            prepareRow(row);
+                            return (
+                                <tr {...row.getRowProps()}>
+                                    {row.cells.map(cell => {
+                                        return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                                    })}
+                                    {console.log(row)}
+                                    <MovieRowButtons  details={row.values} key={i} editMovie={editMovie} deleteMovie={deleteMovie} />
+                                </tr>
+                            )
+                        }
+                    )}
+                </tbody>
+            </table>
+        )
+    }
+
+    const columns = React.useMemo(
+        () => [
+            {
+                Header: ' ',
+                columns: [
+                    {
+                        Header: 'Title',
+                        accessor: 'title',
+                    },
+                    {
+                        Header: 'Genre',
+                        accessor: 'genre',
+                    },
+                    {
+                        Header: 'Year',
+                        accessor: 'year',
+                    },
+                    {
+                        Header: 'Run Time',
+                        accessor: 'run_time',
+                    },
+                    {
+                        Header: 'Rating',
+                        accessor: 'rating',
+                    },
+                    {
+                        Header: 'Main Actors',
+                        accessor: 'main_actors',
+                    },
+                    // {
+                    //     Header: 'Edit/Delete',
+                    // },
+                ],
+            }
+        ],
+        []
+    )
 
     const center = {
         margin: 'auto'
@@ -10,8 +95,8 @@ const PaginatedMovieTable = ({movies, editMovie, deleteMovie}) => {
     return (
         <div className="List">
             <h4>Showing {movies.length} results</h4>
-
-            <table style={center}>
+            <div>Paginated Version</div>
+            {/* <table style={center}>
                 <thead>
                     <tr>
                         <th>Title</th>
@@ -26,13 +111,14 @@ const PaginatedMovieTable = ({movies, editMovie, deleteMovie}) => {
                 {movies.map((movie, index) => (
                     <MovieRow details={movie} key={index} editMovie={editMovie} deleteMovie={deleteMovie} />
                 ))}
+            </table> */}
 
-
-
-            </table>
+            <Table columns={columns} data={movies} />
 
         </div>
     )
 }
 
 export default PaginatedMovieTable;
+
+

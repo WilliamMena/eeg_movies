@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 // import Movie from '../components/movie.js';
+import MovieTable from '../components/movieTable.js';
 import PaginatedMovieTable from '../components/paginatedMovieTable.js';
 import CreateButton from '../components/createButton.js';
-import MovieForm from '../components/movieForm.js'
+import MovieForm from '../components/movieForm.js';
+
 
 import agent from '../agent.js';
 
@@ -90,6 +92,7 @@ const Movies = () => {
         return (
             <div>
                 <CreateButton postMovie={postMovie} />
+                <MovieTable movies={movieList} editMovie={handleEditMovie} deleteMovie={handleDeleteMovie} />
                 <PaginatedMovieTable movies={movieList} editMovie={handleEditMovie} deleteMovie={handleDeleteMovie} />
             </div>
         );
