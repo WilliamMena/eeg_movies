@@ -1,6 +1,6 @@
 import React from 'react';
-import MovieRow from './movieRow.js';
 import { useTable } from 'react-table';
+// import MovieRow from './movieRow.js';
 import MovieRowButtons from './movieRowButtons.js';
 
 const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
@@ -89,9 +89,9 @@ const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
         []
     )
 
-    const center = {
-        margin: 'auto'
-    }
+    // const center = {
+    //     margin: 'auto'
+    // }
 
     return (
         <div className="List">

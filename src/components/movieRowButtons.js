@@ -3,11 +3,7 @@ import React from 'react';
 
 const MovieRowButtons = ({details, editMovie, deleteMovie}) => {
 
-    const {title, genre, year, run_time, rating, main_actors, movie_id} = details
-    let main_actorsHTML = <td></td>
-    if (main_actors) {
-        main_actorsHTML = <td>{main_actors.join(" - ")}</td>
-    }
+    const {movie_id} = details
 
     function handleEditMovie() {
         editMovie(details)

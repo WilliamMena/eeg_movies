@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-// import Movie from '../components/movie.js';
-import MovieTable from '../components/movieTable.js';
+// import MovieTable from '../components/movieTable.js';
 import PaginatedMovieTable from '../components/paginatedMovieTable.js';
 import CreateButton from '../components/createButton.js';
 import MovieForm from '../components/movieForm.js';
