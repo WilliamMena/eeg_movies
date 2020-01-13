@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import MovieForm from './movieForm.js';
+import Button from 'react-bootstrap/Button'
 
 const CreateButton = ({postMovie, movie}) => {
 
@@ -32,7 +33,7 @@ const CreateButton = ({postMovie, movie}) => {
     } else {
         return (
             <div className="form">
-                <button onClick={handleOnClick}>Create</button>
+                <Button variant="outline-primary" onClick={handleOnClick}>Create new movie</Button>
             </div>
         )
     }

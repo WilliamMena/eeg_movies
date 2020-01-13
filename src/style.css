@@ -24,3 +24,11 @@ form {
 .form-group {
     margin-bottom: .2rem !important;
 }
+
+input {
+    text-align: center;
+}
+
+/* .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(9, 132, 227,.2) !important;
+} */
