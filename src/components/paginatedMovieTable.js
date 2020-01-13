@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTable, usePagination } from 'react-table';
+import { useTable, usePagination, useSortBy } from 'react-table';
 // import MovieRow from './movieRow.js';
 import MovieRowButtons from './movieRowButtons.js';
 
@@ -15,7 +15,7 @@ const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
 
             // UnComment when not using Pagination
             // rows,
-            
+
             // Page should have all the rows of each page
             page,
 
@@ -32,6 +32,7 @@ const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
             data,
             initialState: { pageIndex: 0 },
         },
+            useSortBy,
             usePagination
         )
 
@@ -43,7 +44,14 @@ const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
                     {headerGroups.map(headerGroup => (
                         <tr {...headerGroup.getHeaderGroupProps()}>
                             {headerGroup.headers.map(column => (
-                                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                                // <th {...column.getHeaderProps()}>
+                                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                    {column.render('Header')}
+                                    <span>
+                                        {column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}
+                                        {/* ⇩▼ ⇧▲   https://unicode-table.com/en/sets/arrow-symbols/*/}
+                                    </span>
+                                </th>
                             ))}
                         </tr>
                     ))}
@@ -134,6 +142,7 @@ const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
                     {
                         Header: 'Main Actors',
                         accessor: 'main_actors',
+                        sortType: 'basic'
                     },
                     // {
                     //     Header: 'Edit/Delete',
@@ -168,7 +177,7 @@ const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
                     <MovieRow details={movie} key={index} editMovie={editMovie} deleteMovie={deleteMovie} />
                 ))}
             </table> */}
-
+            <sub>To toggle sorting, click the header of the column</sub>
             <Table columns={columns} data={movies} />
 
         </div>
