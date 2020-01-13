@@ -4,6 +4,7 @@ import matchSorter from "match-sorter";
 // import MovieRow from './movieRow.js';
 import MovieRowButtons from './movieRowButtons.js';
 import Table from 'react-bootstrap/Table'
+import Button from 'react-bootstrap/Button'
 
 const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
 
@@ -194,12 +195,12 @@ const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
                     </tbody>
                 </Table>
                 <div>
-                    <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+                    <Button variant="success" onClick={() => previousPage()} disabled={!canPreviousPage}>
                         Previous Page
-                   </button>
-                    <button onClick={() => nextPage()} disabled={!canNextPage}>
+                   </Button>
+                    <Button variant="success" onClick={() => nextPage()} disabled={!canNextPage}>
                         Next Page
-                   </button>
+                   </Button>
                     <div>
                         Page{' '}
                         <em>
@@ -277,9 +278,9 @@ const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
     )
 
     return (
-        <div className="List">
-            <h4>Showing {movies.length} results</h4>
-            <div>Paginated Version</div>
+        <div className="list">
+            {/* <h4>Paginated Table</h4> */}
+            <div>There are a total of {movies.length} results</div>
 
             <sub>To toggle sorting, click the header of the column</sub>
             <ShowTable columns={columns} data={movies} />

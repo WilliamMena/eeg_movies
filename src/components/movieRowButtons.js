@@ -16,8 +16,8 @@ const MovieRowButtons = ({details, editMovie, deleteMovie}) => {
 
     return (
                 <td className="edit_buttons">
-                    <Button variant="outline-dark" onClick={handleEditMovie}>Edit</Button>
-                    <Button variant="dark" onClick={handleDelete}>Delete</Button>
+                    <Button variant="outline-light" onClick={handleEditMovie}>Edit</Button>
+                    <Button variant="success" onClick={handleDelete}>Delete</Button>
                 </td>
     )
 }

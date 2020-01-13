@@ -18,7 +18,7 @@ const CreateButton = ({postMovie, movie}) => {
         return (
             <div>
                 Edit
-                <button onClick={handleClose}>Close</button>
+                <Button variant="success" onClick={handleClose}>Close</Button>
                 <MovieForm postMovie={postMovie} closeForm={handleClose} editMovie={true} movie={movie}/>
             </div>
 
@@ -26,14 +26,14 @@ const CreateButton = ({postMovie, movie}) => {
     } else if (showPopup) {
         return (
             <div>
-                <button onClick={handleClose}>Close</button>
+                <Button variant="success" onClick={handleClose}>Close</Button>
                 <MovieForm postMovie={postMovie} closeForm={handleClose} />
             </div>
         )
     } else {
         return (
             <div className="form">
-                <Button variant="outline-primary" onClick={handleOnClick}>Create new movie</Button>
+                <Button variant="success" onClick={handleOnClick}>Create new movie</Button>
             </div>
         )
     }
