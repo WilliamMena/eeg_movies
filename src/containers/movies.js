@@ -92,7 +92,8 @@ const Movies = () => {
         return (
             <div>
                 <CreateButton postMovie={postMovie} />
-                <MovieTable movies={movieList} editMovie={handleEditMovie} deleteMovie={handleDeleteMovie} />
+                {/* <MovieTable movies={movieList} editMovie={handleEditMovie} deleteMovie={handleDeleteMovie} /> */}
+                {/* {console.log(movieList)} */}
                 <PaginatedMovieTable movies={movieList} editMovie={handleEditMovie} deleteMovie={handleDeleteMovie} />
             </div>
         );

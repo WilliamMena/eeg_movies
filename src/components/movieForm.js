@@ -83,12 +83,12 @@ const MovieForm = ({movie = {}, postMovie, closeForm, editForm, updateMovie, clo
         }
 
         if (editForm) {
-            console.log("Update Movie")
+            // console.log("Update Movie")
             // console.log(movie_id, payLoad);
             updateMovieAPI(movie_id, payLoad)
             close()
         } else {
-            console.log("Create Movie")
+            // console.log("Create Movie")
             createMovie(payLoad)
             // // Should RESET FORM
             // // THEN close form

@@ -39,8 +39,9 @@ const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
                                     {row.cells.map(cell => {
                                         return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                                     })}
-                                    {console.log(row)}
-                                    <MovieRowButtons  details={row.values} key={i} editMovie={editMovie} deleteMovie={deleteMovie} />
+                                    <MovieRowButtons  details={row.original} key={i} editMovie={editMovie} deleteMovie={deleteMovie} />
+                                    {/* {console.log(row)} */}
+                                    {/* {console.log(movies)} */}
                                 </tr>
                             )
                         }
