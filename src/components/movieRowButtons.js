@@ -4,14 +4,14 @@ import Button from 'react-bootstrap/Button';
 
 const MovieRowButtons = ({ details, editMovie, deleteMovie }) => {
 
-    const { movie_id } = details
+    const { movie_id } = details;
 
     function handleEditMovie() {
-        editMovie(details)
+        editMovie(details);
     }
 
     function handleDelete() {
-        deleteMovie(movie_id)
+        deleteMovie(movie_id);
     }
 
     return (

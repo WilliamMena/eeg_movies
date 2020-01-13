@@ -4,7 +4,7 @@ import MovieRow from './movieRow.js';
 const MovieTable = ({ movies, editMovie, deleteMovie }) => {
 
     const center = {
-        margin: 'auto'
+        margin: 'auto';
     }
 
     return (
@@ -26,9 +26,6 @@ const MovieTable = ({ movies, editMovie, deleteMovie }) => {
                 {movies.map((movie, index) => (
                     <MovieRow details={movie} key={index} editMovie={editMovie} deleteMovie={deleteMovie} />
                 ))}
-
-
-
             </table>
 
         </div>

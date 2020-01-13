@@ -10,11 +10,11 @@ const MovieRow = ({ details, editMovie, deleteMovie }) => {
     }
 
     function handleEditMovie() {
-        editMovie(details)
+        editMovie(details);
     }
 
     function handleDelete() {
-        deleteMovie(movie_id)
+        deleteMovie(movie_id);
     }
 
     return (

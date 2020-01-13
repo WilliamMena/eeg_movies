@@ -13,20 +13,16 @@ const MovieForm = ({ movie = {}, postMovie, closeForm, editForm, updateMovie, cl
     const [movieRunTime, setMovieRunTime] = useState(run_time || 1);
     const [movieRating, setMovieRating] = useState(rating || 'G');
     const [movieActors, setMovieActors] = useState(main_actors || []);
-    // const [editView, setEditView] = useState(editForm || false);
 
     function handleMovieTitle(e) {
         setMovieTitle(e.target.value);
     }
 
     function handleMovieGenre(e) {
-        setMovieGenre(e.target.value)
+        setMovieGenre(e.target.value);
     }
 
     function handleMovieYear(e) {
-        // if (e.target.value >= 1888) {
-        //     setMovieYear(parseInt(e.target.value));
-        // }
         setMovieYear(parseInt(e.target.value));
     }
 
@@ -41,8 +37,6 @@ const MovieForm = ({ movie = {}, postMovie, closeForm, editForm, updateMovie, cl
     }
 
     function handleMovieActors(e) {
-        // setMovieActors(e.target.value.split(';').map((word) => word.trim()))
-        // Need to find way to limit to 3 people without messing up the input value
         if (e.target.value.split(';').length <= 3) {
             setMovieActors(e.target.value.split(';'));
         }
@@ -53,7 +47,7 @@ const MovieForm = ({ movie = {}, postMovie, closeForm, editForm, updateMovie, cl
         try {
             data = await agent.Movies.create(movie);
         } catch (err) {
-            alert('create movie error')
+            alert('create movie error');
             throw err;
         }
         postMovie(data)
@@ -64,20 +58,20 @@ const MovieForm = ({ movie = {}, postMovie, closeForm, editForm, updateMovie, cl
         try {
             data = await agent.Movies.edit(movie_id, movie);
         } catch (err) {
-            alert('update movie error')
+            alert('update movie error');
             throw err;
         }
-        data["movie_id"] = movie_id
-        updateMovie(data)
+        data["movie_id"] = movie_id;
+        updateMovie(data);
     }
 
     function handleSubmit(e) {
         e.preventDefault();
 
         if (movieTitle.trim() === "") {
-            alert("You need a title to submit a movie.")
+            alert("You need a title to submit a movie.");
         } else if (movieYear < 1888) {
-            alert("You need to enter a valid year. The minimum is 1888. The year the first ever movie was released.")
+            alert("You need to enter a valid year. The minimum is 1888. The year the first ever movie was released.");
         } else {
             let payLoad = {
                 title: movieTitle.trim(),
@@ -88,11 +82,11 @@ const MovieForm = ({ movie = {}, postMovie, closeForm, editForm, updateMovie, cl
                 main_actors: movieActors
             }
             if (editForm) {
-                updateMovieAPI(movie_id, payLoad)
-                close()
+                updateMovieAPI(movie_id, payLoad);
+                close();
             } else {
-                createMovie(payLoad)
-                closeForm()
+                createMovie(payLoad);
+                closeForm();
             }
         }
 
@@ -140,7 +134,6 @@ const MovieForm = ({ movie = {}, postMovie, closeForm, editForm, updateMovie, cl
             <Form.Group controlId="formMovieRating">
                 <Form.Label>
                     Rating
-                {/* <input type="text" name="rating" value={movieRating} onChange={handleMovieRating} /> */}
                     <Form.Control as="select" value={movieRating} onChange={handleMovieRating}>
                         <option value="G">G</option>
                         <option value="PG">PG</option>
@@ -154,7 +147,6 @@ const MovieForm = ({ movie = {}, postMovie, closeForm, editForm, updateMovie, cl
             <Form.Group controlId="formMovieMainActors">
                 <Form.Label>
                     Main Actors
-                {/* Have to figure out smart way to use value here. Tried value={movieActors.join('; )} */}
                     <Form.Control type="text" name="main_actors" value={movieActors.join(';')} onChange={handleMovieActors} />
                     <Form.Text className="text-muted">
                         (optional, up to 3, seperated by semicolon `;` )

@@ -32,16 +32,16 @@ const Movies = () => {
     }, []);
 
     const postMovie = (movie) => {
-        const newMovieList = [movie, ...movieList]
-        setMovieList(newMovieList)
+        const newMovieList = [movie, ...movieList];
+        setMovieList(newMovieList);
     }
 
     const updateMovie = (mov) => {
-        const indexOfMovie = movieList.indexOf(movieList.find(e => e.movie_id === mov.movie_id))
-        const newMovieList = [...movieList]
-        newMovieList.splice(indexOfMovie, 1, mov)
+        const indexOfMovie = movieList.indexOf(movieList.find(e => e.movie_id === mov.movie_id));
+        const newMovieList = [...movieList];
+        newMovieList.splice(indexOfMovie, 1, mov);
 
-        setMovieList(newMovieList)
+        setMovieList(newMovieList);
     }
 
     const handleDeleteMovie = (movie_id) => {
@@ -55,13 +55,13 @@ const Movies = () => {
             alert('delete movie error');
             throw err;
         }
-        const newMovieList = movieList.filter((m) => m.movie_id !== movie_id)
+        const newMovieList = movieList.filter((m) => m.movie_id !== movie_id);
         setMovieList(newMovieList);
     }
 
     const handleEditMovie = (movie) => {
         setEditMovie(true);
-        setMovie(movie)
+        setMovie(movie);
     }
 
     const handleCloseEditMode = () => {
