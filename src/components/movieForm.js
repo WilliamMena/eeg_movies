@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Form, Button} from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap'
 
 import agent from '../agent.js';
 
@@ -17,6 +17,10 @@ const MovieForm = ({ movie = {}, postMovie, closeForm, editForm, updateMovie, cl
 
     // For Validations
     // const [hasError, setHasError] = useState(false);
+    // const [errors, setErrors] = useState({
+    //     title: '',
+    //     year: ''
+    // })
 
     function handleMovieTitle(e) {
         setMovieTitle(e.target.value);
@@ -27,6 +31,9 @@ const MovieForm = ({ movie = {}, postMovie, closeForm, editForm, updateMovie, cl
     }
 
     function handleMovieYear(e) {
+        // if (e.target.value >= 1888) {
+        //     setMovieYear(parseInt(e.target.value));
+        // }
         setMovieYear(parseInt(e.target.value));
     }
 
@@ -44,7 +51,9 @@ const MovieForm = ({ movie = {}, postMovie, closeForm, editForm, updateMovie, cl
     function handleMovieActors(e) {
         // setMovieActors(e.target.value.split(';').map((word) => word.trim()))
         // Need to find way to limit to 3 people without messing up the input value
-        setMovieActors(e.target.value.split(';'));
+        if (e.target.value.split(';').length <= 3) {
+            setMovieActors(e.target.value.split(';'));
+        }
     }
 
     async function createMovie(movie) {
@@ -77,29 +86,29 @@ const MovieForm = ({ movie = {}, postMovie, closeForm, editForm, updateMovie, cl
 
     function handleSubmit(e) {
         e.preventDefault();
-        let payLoad = {
-            title: movieTitle,
-            genre: movieGenre,
-            year: movieYear,
-            run_time: movieRunTime,
-            rating: movieRating,
-            main_actors: movieActors
-        }
 
-        if (editForm) {
-            // console.log("Update Movie")
-            // console.log(movie_id, payLoad);
-            updateMovieAPI(movie_id, payLoad)
-            close()
+        if (movieTitle.trim() === "") {
+            alert("You need a title to submit a movie.")
         } else {
-            // console.log("Create Movie")
-            createMovie(payLoad)
-            // // Should RESET FORM
-            // // THEN close form
-            closeForm()
+            let payLoad = {
+                title: movieTitle.trim(),
+                genre: movieGenre,
+                year: movieYear,
+                run_time: movieRunTime,
+                rating: movieRating,
+                main_actors: movieActors
+            }
+            if (editForm) {
+                // console.log("Update Movie")
+                // console.log(movie_id, payLoad);
+                updateMovieAPI(movie_id, payLoad)
+                close()
+            } else {
+                // console.log("Create Movie")
+                createMovie(payLoad)
+                closeForm()
+            }
         }
-
-
 
     }
 
@@ -158,14 +167,14 @@ const MovieForm = ({ movie = {}, postMovie, closeForm, editForm, updateMovie, cl
             </Form.Group>
 
             <Form.Group controlId="formMovieMainActors">
-            <Form.Label>
-                Main Actors
+                <Form.Label>
+                    Main Actors
                 {/* Have to figure out smart way to use value here. Tried value={movieActors.join('; )} */}
-                <Form.Control type="text" name="main_actors" value={movieActors.join(';')} onChange={handleMovieActors} />
-                <Form.Text className="text-muted">
-                    (optional, up to 3, seperated by semicolon `;` ) 
+                    <Form.Control type="text" name="main_actors" value={movieActors.join(';')} onChange={handleMovieActors} />
+                    <Form.Text className="text-muted">
+                        (optional, up to 3, seperated by semicolon `;` )
                 </Form.Text>
-            </Form.Label>
+                </Form.Label>
             </Form.Group>
 
             <Button variant="dark" type="submit">
