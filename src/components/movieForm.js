@@ -75,13 +75,8 @@ const MovieForm = ({ movie = {}, postMovie, closeForm, editForm, updateMovie, cl
             alert('update movie error')
             throw err;
         }
-        // Need new function for updated movie
         data["movie_id"] = movie_id
         updateMovie(data)
-
-
-        // movie["movie_id"] = movie_id
-        // updateMovie(movie)
     }
 
     function handleSubmit(e) {
@@ -99,12 +94,9 @@ const MovieForm = ({ movie = {}, postMovie, closeForm, editForm, updateMovie, cl
                 main_actors: movieActors
             }
             if (editForm) {
-                // console.log("Update Movie")
-                // console.log(movie_id, payLoad);
                 updateMovieAPI(movie_id, payLoad)
                 close()
             } else {
-                // console.log("Create Movie")
                 createMovie(payLoad)
                 closeForm()
             }
@@ -125,7 +117,6 @@ const MovieForm = ({ movie = {}, postMovie, closeForm, editForm, updateMovie, cl
             <Form.Group controlId="formMovieGenre">
                 <Form.Label>
                     Genre
-                {/* <input type="text" name="genre" value={movieGenre} onChange={handleMovieGenre} /> */}
                     <Form.Control as="select" size="7" value={movieGenre} onChange={handleMovieGenre}>>
                     <option value="action">Action</option>
                         <option value="comedy">Comedy</option>

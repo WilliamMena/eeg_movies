@@ -1,9 +1,9 @@
 import React from 'react';
 
 
-const MovieRow = ({details, editMovie, deleteMovie}) => {
+const MovieRow = ({ details, editMovie, deleteMovie }) => {
 
-    const {title, genre, year, run_time, rating, main_actors, movie_id} = details
+    const { title, genre, year, run_time, rating, main_actors, movie_id } = details
     let main_actorsHTML = <td></td>
     if (main_actors) {
         main_actorsHTML = <td>{main_actors.join(" - ")}</td>
@@ -12,17 +12,13 @@ const MovieRow = ({details, editMovie, deleteMovie}) => {
     function handleEditMovie() {
         editMovie(details)
     }
-    
+
     function handleDelete() {
         deleteMovie(movie_id)
     }
 
     return (
-        // <div className="movie" key={props.details.movie_id}>
-        //     <h1>Title: {props.details.title}</h1>
-        //     <h3>Genre: {props.details.genre}</h3>
-        // </div>
-            <tbody>
+        <tbody>
             <tr>
                 <td>{title}</td>
                 <td>{genre}</td>
@@ -37,7 +33,7 @@ const MovieRow = ({details, editMovie, deleteMovie}) => {
                     <button onClick={handleDelete}>Delete</button>
                 </td>
             </tr>
-            </tbody>
+        </tbody>
     )
 }
 

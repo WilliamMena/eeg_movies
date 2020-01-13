@@ -132,10 +132,6 @@ const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
             usePagination
         )
 
-        // We don't want to render all of the rows for this example, so cap
-        // it for this use case
-        // const firstPageRows = rows.slice(0, 10);
-
         // Render the UI for your table
         return (
             <div>
@@ -184,7 +180,7 @@ const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
                                     <tr {...row.getRowProps()}>
                                         {row.cells.map(cell => {
                                             return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                                        }).slice(0, row.cells.length-1)}
+                                        }).slice(0, row.cells.length - 1)}
                                         <MovieRowButtons details={row.original} key={i} editMovie={editMovie} deleteMovie={deleteMovie} />
                                         {/* {console.log(row)} */}
                                         {/* {console.log(movies)} */}

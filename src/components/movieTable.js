@@ -1,7 +1,7 @@
 import React from 'react';
 import MovieRow from './movieRow.js';
 
-const MovieTable = ({movies, editMovie, deleteMovie}) => {
+const MovieTable = ({ movies, editMovie, deleteMovie }) => {
 
     const center = {
         margin: 'auto'

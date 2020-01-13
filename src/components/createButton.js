@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import MovieForm from './movieForm.js';
 import Button from 'react-bootstrap/Button'
 
-const CreateButton = ({postMovie, movie}) => {
+const CreateButton = ({ postMovie, movie }) => {
 
     const [showPopup, setPopup] = useState(false);
 
@@ -19,7 +19,7 @@ const CreateButton = ({postMovie, movie}) => {
             <div>
                 Edit
                 <Button variant="success" onClick={handleClose}>Close</Button>
-                <MovieForm postMovie={postMovie} closeForm={handleClose} editMovie={true} movie={movie}/>
+                <MovieForm postMovie={postMovie} closeForm={handleClose} editMovie={true} movie={movie} />
             </div>
 
         )

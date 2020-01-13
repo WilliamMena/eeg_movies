@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import MovieTable from '../components/movieTable.js';
 import PaginatedMovieTable from '../components/paginatedMovieTable.js';
 import CreateButton from '../components/createButton.js';
 import MovieForm from '../components/movieForm.js';
@@ -33,10 +32,8 @@ const Movies = () => {
     }, []);
 
     const postMovie = (movie) => {
-        // console.log(movie)
         const newMovieList = [movie, ...movieList]
         setMovieList(newMovieList)
-        // agent.Movies.create(movie);
     }
 
     const updateMovie = (mov) => {
@@ -48,8 +45,6 @@ const Movies = () => {
     }
 
     const handleDeleteMovie = (movie_id) => {
-        // console.log("Reached Movies");
-        // console.log(movie_id);
         deleteMovie(movie_id);
     }
 
@@ -68,7 +63,7 @@ const Movies = () => {
         setEditMovie(true);
         setMovie(movie)
     }
-    
+
     const handleCloseEditMode = () => {
         setEditMovie(false);
     }
@@ -78,22 +73,18 @@ const Movies = () => {
     if (error) {
         return <div>Error: {error.message}</div>;
     } else if (isLoading) {
-        return <div>Loading...</div> 
+        return <div>Loading...</div>
     } else if (editMovie) {
-        // return <CreateButton movie={movie} />
-        // return <MovieForm movie={movie} editForm={true} />
         return (
             <div>
                 <Button variant="success" onClick={handleCloseEditMode}>Close Edit Mode</Button>
                 <br></br>
-                <MovieForm movie={movie} editForm={true} updateMovie={updateMovie} close={handleCloseEditMode}/>
+                <MovieForm movie={movie} editForm={true} updateMovie={updateMovie} close={handleCloseEditMode} />
             </div>)
     } else {
         return (
             <div>
                 <CreateButton postMovie={postMovie} />
-                {/* <MovieTable movies={movieList} editMovie={handleEditMovie} deleteMovie={handleDeleteMovie} /> */}
-                {/* {console.log(movieList)} */}
                 <PaginatedMovieTable movies={movieList} editMovie={handleEditMovie} deleteMovie={handleDeleteMovie} />
             </div>
         );
