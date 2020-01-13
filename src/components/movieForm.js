@@ -31,7 +31,10 @@ const MovieForm = ({ movie = {}, postMovie, closeForm, editForm, updateMovie, cl
     }
 
     function handleMovieRunTime(e) {
-        setMovieRunTime(parseInt(e.target.value));
+        if (e.target.value > 0) {
+            setMovieRunTime(parseInt(e.target.value));
+        }
+        // setMovieRunTime(parseInt(e.target.value));
     }
 
     function handleMovieRating(e) {
