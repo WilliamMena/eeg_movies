@@ -38,7 +38,7 @@ To accomplish all this I've used a couple libraries.
 Mainly [react-table](https://github.com/tannerlinsley/react-table/tree/master/examples/sub-components). <br />
 The other packages were for handling things like API requests but could have been done with the `fetch()` API.
 
-## < Component Breakdown />
+## Component Breakdown
 
 So you may notice a number of components. Some can be ignored due to them being created during the initial moment when trying to figure out CRUD. Some kept for when testing `outside` of the Paginated table.
 
