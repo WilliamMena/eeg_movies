@@ -1,0 +1,17 @@
+table {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 60px ;
+}
+
+.edit_buttons button {
+    padding: .2rem .75rem;
+}
+
+.edit_buttons>button {
+    margin-right: 2px;
+}
+
+td {
+    vertical-align: middle !important;
+}

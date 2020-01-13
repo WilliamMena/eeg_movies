@@ -3,6 +3,7 @@ import { useTable, usePagination, useSortBy, useFilters, useGlobalFilter } from 
 import matchSorter from "match-sorter";
 // import MovieRow from './movieRow.js';
 import MovieRowButtons from './movieRowButtons.js';
+import Table from 'react-bootstrap/Table'
 
 const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
 
@@ -56,7 +57,7 @@ const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
     fuzzyTextFilterFn.autoRemove = val => !val;
 
 
-    function Table({ columns, data }) {
+    function ShowTable({ columns, data }) {
         // Use the state and functions returned from useTable to build your UI
 
         const filterTypes = React.useMemo(
@@ -137,7 +138,7 @@ const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
         // Render the UI for your table
         return (
             <div>
-                <table {...getTableProps()}>
+                <Table striped hover size="sm" {...getTableProps()}>
                     <thead>
                         {headerGroups.map(headerGroup => (
                             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -191,7 +192,7 @@ const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
                             }
                         )}
                     </tbody>
-                </table>
+                </Table>
                 <div>
                     <button onClick={() => previousPage()} disabled={!canPreviousPage}>
                         Previous Page
@@ -281,7 +282,7 @@ const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
             <div>Paginated Version</div>
 
             <sub>To toggle sorting, click the header of the column</sub>
-            <Table columns={columns} data={movies} />
+            <ShowTable columns={columns} data={movies} />
 
         </div>
     )

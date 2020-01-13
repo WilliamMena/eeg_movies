@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from 'react-bootstrap/Button';
 
 
 const MovieRowButtons = ({details, editMovie, deleteMovie}) => {
@@ -14,9 +15,9 @@ const MovieRowButtons = ({details, editMovie, deleteMovie}) => {
     }
 
     return (
-                <td>
-                    <button onClick={handleEditMovie}>Edit</button>
-                    <button onClick={handleDelete}>Delete</button>
+                <td className="edit_buttons">
+                    <Button variant="outline-dark" onClick={handleEditMovie}>Edit</Button>
+                    <Button variant="dark" onClick={handleDelete}>Delete</Button>
                 </td>
     )
 }
