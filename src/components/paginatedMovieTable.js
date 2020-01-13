@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTable } from 'react-table';
+import { useTable, usePagination } from 'react-table';
 // import MovieRow from './movieRow.js';
 import MovieRowButtons from './movieRowButtons.js';
 
@@ -11,15 +11,33 @@ const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
             getTableProps,
             getTableBodyProps,
             headerGroups,
-            rows,
             prepareRow,
+
+            // UnComment when not using Pagination
+            // rows,
+            
+            // Page should have all the rows of each page
+            page,
+
+            pageOptions,
+            state: { pageIndex, pageSize },
+            gotoPage,
+            previousPage,
+            nextPage,
+            setPageSize,
+            canPreviousPage,
+            canNextPage,
         } = useTable({
             columns,
             data,
-        })
-    
+            initialState: { pageIndex: 0 },
+        },
+            usePagination
+        )
+
         // Render the UI for your table
         return (
+            <div>
             <table {...getTableProps()}>
                 <thead>
                     {headerGroups.map(headerGroup => (
@@ -31,7 +49,8 @@ const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
                     ))}
                 </thead>
                 <tbody {...getTableBodyProps()}>
-                    {rows.map(
+                    {/* {row.map( */}
+                    {page.map(
                         (row, i) => {
                             prepareRow(row);
                             return (
@@ -39,7 +58,7 @@ const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
                                     {row.cells.map(cell => {
                                         return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                                     })}
-                                    <MovieRowButtons  details={row.original} key={i} editMovie={editMovie} deleteMovie={deleteMovie} />
+                                    <MovieRowButtons details={row.original} key={i} editMovie={editMovie} deleteMovie={deleteMovie} />
                                     {/* {console.log(row)} */}
                                     {/* {console.log(movies)} */}
                                 </tr>
@@ -48,6 +67,42 @@ const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
                     )}
                 </tbody>
             </table>
+            <div>
+                <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+                    Previous Page
+                   </button>
+                <button onClick={() => nextPage()} disabled={!canNextPage}>
+                    Next Page
+                   </button>
+                <div>
+                    Page{' '}
+                    <em>
+                        {pageIndex + 1} of {pageOptions.length}
+                    </em>
+                </div>
+                <div>Go to page:</div>
+                <input
+                    type="number"
+                    defaultValue={pageIndex + 1 || 1}
+                    onChange={e => {
+                        const page = e.target.value ? Number(e.target.value) - 1 : 0
+                        gotoPage(page)
+                    }}
+                />
+                <select
+                    value={pageSize}
+                    onChange={e => {
+                        setPageSize(Number(e.target.value))
+                    }}
+                >
+                    {[10, 20].map(pageSize => (
+                        <option key={pageSize} value={pageSize}>
+                            Show {pageSize}
+                        </option>
+                    ))}
+                </select>
+            </div>
+            </div>
         )
     }
 

@@ -9,7 +9,7 @@ const MovieForm = ({movie = {}, postMovie, closeForm, editForm, updateMovie, clo
     const [movieTitle, setMovieTitle] = useState(title || '');
     const [movieGenre, setMovieGenre] = useState(genre || 'action');
     const [movieYear, setMovieYear] = useState(year || 1888);
-    const [movieRunTime, setMovieRunTime] = useState(run_time || 0);
+    const [movieRunTime, setMovieRunTime] = useState(run_time || 1);
     const [movieRating, setMovieRating] = useState(rating || 'G');
     const [movieActors, setMovieActors] = useState(main_actors || []);
     // const [editView, setEditView] = useState(editForm || false);
