@@ -184,7 +184,7 @@ const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
                                     <tr {...row.getRowProps()}>
                                         {row.cells.map(cell => {
                                             return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                                        })}
+                                        }).slice(0, row.cells.length-1)}
                                         <MovieRowButtons details={row.original} key={i} editMovie={editMovie} deleteMovie={deleteMovie} />
                                         {/* {console.log(row)} */}
                                         {/* {console.log(movies)} */}
@@ -209,18 +209,18 @@ const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
                     </div>
                     <br></br>
                     <div>
-                        Go to page: 
+                        Go to page:
                         <input
-                        type="number"
-                        defaultValue={pageIndex + 1 || 1}
-                        onChange={e => {
-                            const page = e.target.value ? Number(e.target.value) - 1 : 0
-                            gotoPage(page)
-                        }}
-                    />
+                            type="number"
+                            defaultValue={pageIndex + 1 || 1}
+                            onChange={e => {
+                                const page = e.target.value ? Number(e.target.value) - 1 : 0
+                                gotoPage(page)
+                            }}
+                        />
                     </div>
                     <br></br>
-                    
+
                     <select
                         value={pageSize}
                         onChange={e => {
@@ -268,9 +268,10 @@ const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
                         accessor: 'main_actors',
                         sortType: 'basic'
                     },
-                    // {
-                    //     Header: 'Edit/Delete',
-                    // },
+
+                    {
+                        Header: 'Edit/Delete',
+                    },
                 ],
             }
         ],
