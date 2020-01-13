@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import PaginatedMovieTable from '../components/paginatedMovieTable.js';
 import CreateButton from '../components/createButton.js';
 import MovieForm from '../components/movieForm.js';
+import Button from 'react-bootstrap/Button'
 
 
 import agent from '../agent.js';
@@ -83,7 +84,7 @@ const Movies = () => {
         // return <MovieForm movie={movie} editForm={true} />
         return (
             <div>
-                <button onClick={handleCloseEditMode}>Close Edit Mode</button>
+                <Button variant="success" onClick={handleCloseEditMode}>Close Edit Mode</Button>
                 <br></br>
                 <MovieForm movie={movie} editForm={true} updateMovie={updateMovie} close={handleCloseEditMode}/>
             </div>)
