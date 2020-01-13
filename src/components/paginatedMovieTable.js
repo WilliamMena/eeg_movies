@@ -1,14 +1,93 @@
 import React from 'react';
-import { useTable, usePagination, useSortBy, useGlobalFilter } from 'react-table';
+import { useTable, usePagination, useSortBy, useFilters, useGlobalFilter } from 'react-table';
 import matchSorter from "match-sorter";
 // import MovieRow from './movieRow.js';
 import MovieRowButtons from './movieRowButtons.js';
 
 const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
 
+    // Define a default UI for filtering
+    function GlobalFilter({
+        preGlobalFilteredRows,
+        globalFilter,
+        setGlobalFilter
+    }) {
+        const count = preGlobalFilteredRows.length;
+
+        return (
+            <span>
+                Search:{" "}
+                <input
+                    value={globalFilter || ""}
+                    onChange={e => {
+                        setGlobalFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
+                    }}
+                    placeholder={`${count} records...`}
+                    style={{
+                        fontSize: "1.1rem",
+                        border: "0"
+                    }}
+                />
+            </span>
+        );
+    }
+
+    // Define a default UI for filtering
+    function DefaultColumnFilter({
+        column: { filterValue, preFilteredRows, setFilter }
+    }) {
+        const count = preFilteredRows.length;
+
+        return (
+            <input
+                value={filterValue || ""}
+                onChange={e => {
+                    setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
+                }}
+                placeholder={`Search ${count} records...`}
+            />
+        );
+    }
+
+    function fuzzyTextFilterFn(rows, id, filterValue) {
+        return matchSorter(rows, filterValue, { keys: [row => row.values[id]] });
+    }
+
+    fuzzyTextFilterFn.autoRemove = val => !val;
+
 
     function Table({ columns, data }) {
         // Use the state and functions returned from useTable to build your UI
+
+        const filterTypes = React.useMemo(
+            () => ({
+                // Add a new fuzzyTextFilterFn filter type.
+                fuzzyText: fuzzyTextFilterFn,
+                // Or, override the default text filter to use
+                // "startWith"
+                text: (rows, id, filterValue) => {
+                    return rows.filter(row => {
+                        const rowValue = row.values[id];
+                        return rowValue !== undefined
+                            ? String(rowValue)
+                                .toLowerCase()
+                                .startsWith(String(filterValue).toLowerCase())
+                            : true;
+                    });
+                }
+            }),
+            []
+        );
+
+        const defaultColumn = React.useMemo(
+            () => ({
+                // Let's set up our default Filter UI
+                Filter: DefaultColumnFilter
+            }),
+            []
+        );
+
+
         const {
             getTableProps,
             getTableBodyProps,
@@ -20,8 +99,9 @@ const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
 
             // Page should have all the rows of each page
             page,
-
+            // Below for Pagination
             pageOptions,
+            state,
             state: { pageIndex, pageSize },
             gotoPage,
             previousPage,
@@ -29,89 +109,124 @@ const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
             setPageSize,
             canPreviousPage,
             canNextPage,
+
+            // Below for filtering
+            flatColumns,
+            preGlobalFilteredRows,
+            setGlobalFilter
         } = useTable({
             columns,
             data,
             initialState: { pageIndex: 0 },
+
+            // Below for filtering
+            defaultColumn,
+            filterTypes
+
         },
+            useFilters,
+            useGlobalFilter,
             useSortBy,
             usePagination
         )
 
+        // We don't want to render all of the rows for this example, so cap
+        // it for this use case
+        // const firstPageRows = rows.slice(0, 10);
+
         // Render the UI for your table
         return (
             <div>
-            <table {...getTableProps()}>
-                <thead>
-                    {headerGroups.map(headerGroup => (
-                        <tr {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map(column => (
-                                // <th {...column.getHeaderProps()}>
-                                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                                    {column.render('Header')}
-                                    <span>
-                                        {column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}
-                                        {/* ⇩▼ ⇧▲   https://unicode-table.com/en/sets/arrow-symbols/*/}
-                                    </span>
-                                </th>
-                            ))}
+                <table {...getTableProps()}>
+                    <thead>
+                        {headerGroups.map(headerGroup => (
+                            <tr {...headerGroup.getHeaderGroupProps()}>
+                                {headerGroup.headers.map(column => (
+                                    // <th {...column.getHeaderProps()}>
+                                    <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                        {column.render('Header')}
+                                        <span>
+                                            {column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}
+                                            {/* ⇩▼ ⇧▲   https://unicode-table.com/en/sets/arrow-symbols/*/}
+                                        </span>
+
+
+                                        {/* Render the columns filter UI */}
+                                        {/* <div>{column.canFilter ? column.render("Filter") : null}</div> */}
+                                    </th>
+
+                                ))}
+                            </tr>
+                        ))}
+                        <tr>
+                            <th
+                                colSpan={flatColumns.length}
+                                style={{
+                                    textAlign: "left"
+                                }}
+                            >
+                                <GlobalFilter
+                                    preGlobalFilteredRows={preGlobalFilteredRows}
+                                    globalFilter={state.globalFilter}
+                                    setGlobalFilter={setGlobalFilter}
+                                />
+                            </th>
                         </tr>
-                    ))}
-                </thead>
-                <tbody {...getTableBodyProps()}>
-                    {/* {row.map( */}
-                    {page.map(
-                        (row, i) => {
-                            prepareRow(row);
-                            return (
-                                <tr {...row.getRowProps()}>
-                                    {row.cells.map(cell => {
-                                        return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                                    })}
-                                    <MovieRowButtons details={row.original} key={i} editMovie={editMovie} deleteMovie={deleteMovie} />
-                                    {/* {console.log(row)} */}
-                                    {/* {console.log(movies)} */}
-                                </tr>
-                            )
-                        }
-                    )}
-                </tbody>
-            </table>
-            <div>
-                <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-                    Previous Page
-                   </button>
-                <button onClick={() => nextPage()} disabled={!canNextPage}>
-                    Next Page
-                   </button>
+                    </thead>
+                    <tbody {...getTableBodyProps()}>
+                        {/* {row.map( */}
+                        {page.map(
+                            (row, i) => {
+                                prepareRow(row);
+                                return (
+                                    <tr {...row.getRowProps()}>
+                                        {row.cells.map(cell => {
+                                            return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                                        })}
+                                        <MovieRowButtons details={row.original} key={i} editMovie={editMovie} deleteMovie={deleteMovie} />
+                                        {/* {console.log(row)} */}
+                                        {/* {console.log(movies)} */}
+                                    </tr>
+                                )
+                            }
+                        )}
+                    </tbody>
+                </table>
                 <div>
-                    Page{' '}
-                    <em>
-                        {pageIndex + 1} of {pageOptions.length}
-                    </em>
+                    <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+                        Previous Page
+                   </button>
+                    <button onClick={() => nextPage()} disabled={!canNextPage}>
+                        Next Page
+                   </button>
+                    <div>
+                        Page{' '}
+                        <em>
+                            {pageIndex + 1} of {pageOptions.length}
+                        </em>
+                    </div>
+                    <div>Go to page:</div>
+                    <input
+                        type="number"
+                        defaultValue={pageIndex + 1 || 1}
+                        onChange={e => {
+                            const page = e.target.value ? Number(e.target.value) - 1 : 0
+                            gotoPage(page)
+                        }}
+                    />
+                    <select
+                        value={pageSize}
+                        onChange={e => {
+                            setPageSize(Number(e.target.value))
+                        }}
+                    >
+                        {[10, 20].map(pageSize => (
+                            <option key={pageSize} value={pageSize}>
+                                Show {pageSize}
+                            </option>
+                        ))}
+                    </select>
                 </div>
-                <div>Go to page:</div>
-                <input
-                    type="number"
-                    defaultValue={pageIndex + 1 || 1}
-                    onChange={e => {
-                        const page = e.target.value ? Number(e.target.value) - 1 : 0
-                        gotoPage(page)
-                    }}
-                />
-                <select
-                    value={pageSize}
-                    onChange={e => {
-                        setPageSize(Number(e.target.value))
-                    }}
-                >
-                    {[10, 20].map(pageSize => (
-                        <option key={pageSize} value={pageSize}>
-                            Show {pageSize}
-                        </option>
-                    ))}
-                </select>
-            </div>
             </div>
         )
     }
@@ -155,30 +270,11 @@ const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
         []
     )
 
-    // const center = {
-    //     margin: 'auto'
-    // }
-
     return (
         <div className="List">
             <h4>Showing {movies.length} results</h4>
             <div>Paginated Version</div>
-            {/* <table style={center}>
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Genre</th>
-                        <th>Year</th>
-                        <th>Run Time</th>
-                        <th>Rating</th>
-                        <th>Main Actors</th>
-                    </tr>
-                </thead>
 
-                {movies.map((movie, index) => (
-                    <MovieRow details={movie} key={index} editMovie={editMovie} deleteMovie={deleteMovie} />
-                ))}
-            </table> */}
             <sub>To toggle sorting, click the header of the column</sub>
             <Table columns={columns} data={movies} />
 
