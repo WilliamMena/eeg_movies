@@ -1,9 +1,11 @@
 import React from 'react';
-import { useTable, usePagination, useSortBy } from 'react-table';
+import { useTable, usePagination, useSortBy, useGlobalFilter } from 'react-table';
+import matchSorter from "match-sorter";
 // import MovieRow from './movieRow.js';
 import MovieRowButtons from './movieRowButtons.js';
 
 const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
+
 
     function Table({ columns, data }) {
         // Use the state and functions returned from useTable to build your UI
