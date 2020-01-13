@@ -7,11 +7,11 @@ const CreateButton = ({ postMovie, movie }) => {
     const [showPopup, setPopup] = useState(false);
 
     function handleOnClick() {
-        setPopup(true)
+        setPopup(true);
     }
 
     function handleClose() {
-        setPopup(false)
+        setPopup(false);
     }
 
     if (movie && showPopup) {

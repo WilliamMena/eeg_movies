@@ -15,13 +15,6 @@ const MovieForm = ({ movie = {}, postMovie, closeForm, editForm, updateMovie, cl
     const [movieActors, setMovieActors] = useState(main_actors || []);
     // const [editView, setEditView] = useState(editForm || false);
 
-    // For Validations
-    // const [hasError, setHasError] = useState(false);
-    // const [errors, setErrors] = useState({
-    //     title: '',
-    //     year: ''
-    // })
-
     function handleMovieTitle(e) {
         setMovieTitle(e.target.value);
     }
@@ -41,7 +34,6 @@ const MovieForm = ({ movie = {}, postMovie, closeForm, editForm, updateMovie, cl
         if (e.target.value > 0) {
             setMovieRunTime(parseInt(e.target.value));
         }
-        // setMovieRunTime(parseInt(e.target.value));
     }
 
     function handleMovieRating(e) {
@@ -84,6 +76,8 @@ const MovieForm = ({ movie = {}, postMovie, closeForm, editForm, updateMovie, cl
 
         if (movieTitle.trim() === "") {
             alert("You need a title to submit a movie.")
+        } else if (movieYear < 1888) {
+            alert("You need to enter a valid year. The minimum is 1888. The year the first ever movie was released.")
         } else {
             let payLoad = {
                 title: movieTitle.trim(),
