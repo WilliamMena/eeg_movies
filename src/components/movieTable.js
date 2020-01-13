@@ -4,7 +4,7 @@ import MovieRow from './movieRow.js';
 const MovieTable = ({ movies, editMovie, deleteMovie }) => {
 
     const center = {
-        margin: 'auto';
+        margin: 'auto'
     }
 
     return (
