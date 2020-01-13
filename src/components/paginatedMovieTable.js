@@ -195,10 +195,10 @@ const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
                     </tbody>
                 </Table>
                 <div>
-                    <Button variant="success" onClick={() => previousPage()} disabled={!canPreviousPage}>
+                    <Button variant="success" className="previous-page" onClick={() => previousPage()} disabled={!canPreviousPage}>
                         Previous Page
                    </Button>
-                    <Button variant="success" onClick={() => nextPage()} disabled={!canNextPage}>
+                    <Button variant="success" className="next-page" onClick={() => nextPage()} disabled={!canNextPage}>
                         Next Page
                    </Button>
                     <div>

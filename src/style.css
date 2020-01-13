@@ -32,9 +32,17 @@ table {
     background-color: rgb(0, 159, 127) !important;
 }
 
+.btn-success:disabled {
+    background-color: rgba(0, 184, 148, .6) !important;
+    border-color: rgba(0, 184, 148, 0) !important;
+}
 
 .edit_buttons>button {
     margin-right: 2px;
+}
+
+.previous-page {
+    margin-right: 5px;
 }
 
 td {
