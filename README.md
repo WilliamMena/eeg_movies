@@ -1,5 +1,3 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 EEG Code Challenge Submission for [William Mena](mailto:williammena1991@gmail.com)
 
 ## Install
