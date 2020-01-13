@@ -205,8 +205,10 @@ const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
                             {pageIndex + 1} of {pageOptions.length}
                         </em>
                     </div>
-                    <div>Go to page:</div>
-                    <input
+                    <br></br>
+                    <div>
+                        Go to page: 
+                        <input
                         type="number"
                         defaultValue={pageIndex + 1 || 1}
                         onChange={e => {
@@ -214,6 +216,9 @@ const PaginatedMovieTable = ({ movies, editMovie, deleteMovie }) => {
                             gotoPage(page)
                         }}
                     />
+                    </div>
+                    <br></br>
+                    
                     <select
                         value={pageSize}
                         onChange={e => {
