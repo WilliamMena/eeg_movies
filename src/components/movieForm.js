@@ -105,7 +105,7 @@ const MovieForm = ({ movie = {}, postMovie, closeForm, editForm, updateMovie, cl
             <Form.Group controlId="formMovieGenre">
                 <Form.Label>
                     Genre
-                    <Form.Control as="select" size="7" value={movieGenre} onChange={handleMovieGenre}>>
+                    <Form.Control as="select" size="7" value={movieGenre} onChange={handleMovieGenre}>
                     <option value="action">Action</option>
                         <option value="comedy">Comedy</option>
                         <option value="drama">Drama</option>
